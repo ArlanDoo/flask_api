@@ -87,5 +87,10 @@ def create_tables():
     create_noun_user()
     create_noun_post()
 
-def add_request_str(tablename, fields, values):
-    return f"INSERT INTO {tablename} VALUES ({', '.join(values)})"
+def add_request_str(tablename, values):
+    return f"INSERT INTO {tablename} VALUES ({values})"
+
+def test():
+    
+    testArr = [{"id": 3, "author": "Test 1"}, {"id": 22, "author": "Test 2"}, {"id": 55, "author": "Test 55"}, {"id": 9, "author": "Test 22"}]
+    print()
