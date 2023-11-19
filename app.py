@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request, render_template
-import json
 import random
 
 from app_config import MAIN_PATH_API
@@ -10,9 +9,6 @@ from model.user import User
 
 app = Flask(__name__)
 # create_tables()
-
-posts = []
-users = []
 
 @app.route(f"{MAIN_PATH_API}/ping", methods = ["GET"])
 def ping_app():
@@ -50,13 +46,19 @@ def add_post():
 
 @app.route(f"{MAIN_PATH_API}/update_post", methods = ["PUT"])
 def update_post():
-    pass
+    
+    post_json = request.get_json()
+    
+    new_post = Post(post_json["id"], "",
+                    post_json["description"],
+                    post_json["rating"], "", "")
+    
+    return jsonify(new_post.update_post())
 
 
 @app.route(f"{MAIN_PATH_API}/del_post", methods = ["DELETE"])
 def del_post():
     
-    # post_id = request.args["post_id"]
     post_json = request.get_json()
     post_id = post_json["id"]
     post = Post(post_id, "", "", 0, "", "")

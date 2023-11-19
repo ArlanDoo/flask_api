@@ -1,4 +1,3 @@
-import psycopg2
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
@@ -17,14 +16,22 @@ class User:
     
     def add_user(self):
         
-        cursor = connection_to_db()
+        try:
+            
+            cursor = connection_to_db()
+            
+            cursor.execute("""
+                INSERT INTO users (id, firstname, lastname, age, email)
+                VALUES (%(id)s, %(fname)s, %(lname)s, %(age)s, %(email)s);
+                """,
+                {"id": self.id, "fname": self.firstname, "lname": self.lastname, "age": self.age, "email": self.email})
+            
+            cursor.close()
+            
+            return ({"response": "User is success added"})
         
-        cursor.execute("""
-            INSERT INTO users (id, firstname, lastname, age, email)
-            VALUES (%(id)s, %(fname)s, %(lname)s, %(age)s, %(email)s);
-            """,
-            {"id": self.id, "fname": self.firstname, "lname": self.lastname, "age": self.age, "email": self.email})
-        
-        cursor.close()
-        
-        return ({"response": "User is success added"})
+        except Error as err:
+            
+            return ({
+                "error": err
+            })
