@@ -54,7 +54,7 @@ class Post:
                 """,
                 {"id": self.id})
             
-            return (cursor)
+            return {"response": "Post deleted"}
         
         except Error as err:
             

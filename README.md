@@ -14,8 +14,8 @@ pip install -r requirements.txt (или прописать свой путь к 
 
 Создать пользователей:
 В POSTMAN или подобном приложении симмитировать POST - запрос с параметрами:
-    1) URL - http://<основной_адрес_API>/newuser
-    2) тело запроса: 
+1) URL - http://<основной_адрес_API>/newuser
+2) тело запроса: 
         {
                 "firstname": "<имя_пользователя>",
                 "lastname": "<фамилия_пользователя>",
@@ -23,10 +23,20 @@ pip install -r requirements.txt (или прописать свой путь к 
                 "email": "<п/я_пользователя>"
         }
 
+3) Пример:
+   URL - http://127.0.0.1:5000/flask_bloger/api/v1.0/newuser
+   Тело запроса:
+   {
+        "firstname": "Ivan",
+        "lastname": "Ivanov",
+        "age": 22,
+        "email": "ivanov@ivan.ru"
+   }
+
 Добавить пост:
 В POSTMAN или подобном приложении симмитировать POST - запрос с параметрами:
-    1) URL - http://<основной_адрес_API>/add_post
-    2) тело запроса: 
+ 1) URL - http://<основной_адрес_API>/add_post
+ 2) тело запроса: 
         {
                 "author": "<имя_пользователя>",
                 "description": "<содержимое_поста>",
@@ -34,25 +44,49 @@ pip install -r requirements.txt (или прописать свой путь к 
                 "added": <время_создания(не обязательно)>,
                 "updated": <время_обновления(не обязательно)>
         }
+3) Пример:
+   URL - http://127.0.0.1:5000/flask_bloger/api/v1.0/add_post
+   Тело запроса:
+   {
+        "author": "Ivan",
+        "description": "Test post for che funcs",
+        "rating": 5,
+        "added": null,
+        "updated": null
+    }
     
 Обновить пост:
 В POSTMAN или подобном приложении симмитировать PUT - запрос с параметрами:
-    1) URL - http://<основной_адрес_API>/add_post
-    2) тело запроса: 
+1) URL - http://<основной_адрес_API>/add_post
+2) тело запроса: 
         {
                 "id": <id_поста>,
                 "description": "<обновленное_содержимое_поста>",
                 "rating": <рейтинг_поста>
         }
+3) URL - http://127.0.0.1:5000/flask_bloger/api/v1.0/update_post
+   Тело запроса:
+   {
+        "id": 346,
+        "description": "Update current post",
+        "rating": 0
+   }
 
 Удалить пост:
 В POSTMAN или подобном приложении симмитировать DELETE - запрос с параметрами:
-    1) URL - http://<основной_адрес_API>/del_post
-    2) тело запроса: 
+1) URL - http://<основной_адрес_API>/del_post
+2) тело запроса: 
         {
                 "id": <id_поста>
         }
+3) URL - 
+   Тело запроса:
+   {
+        "id": 346
+   }
 
 Получить пост(-ы):
 В POSTMAN или подобном приложении симмитировать GET - запрос с параметрами:
-    1) URL - http://<основной_адрес_API>/posts?post_id=<id_поста>&author=<имя_пользователя>
+1) URL - http://<основной_адрес_API>/posts?post_id=<id_поста>&author=<имя_пользователя>
+2) Пример:
+   http://127.0.0.1:5000/flask_bloger/api/v1.0/posts?post_id=481&author=Arlan
